@@ -1,4 +1,35 @@
 				Bus passenger volume forecast
+
+
+2.data handle
+
+	只做参考用，"/" 前后分别对应的是白天和夜里的天气状况，按照官方的说法： “今天白天”是指上午8：00到晚上20：00这12个小时；“今天夜间”指20：00到次日早上8：00这12个小时；“明天”就是指第二天上午8点到第三天上午八点。
+   
+   2.1 gd_line_desc:
+         线路名称：线路1（line_name=1）
+   	 线路站点数：24(lineStationNum)
+         线路类型：广州市区(lineType=0)，广州佛山跨区域(linetype=1)
+   2.2 gd_weather_report
+	 日期：Date_time 20140801
+         天气状况：白天weatherD/夜间weatherN
+         气温:最高（TemperatureMax） 、最低（TemperatureMin）
+	 风力：（wind_direction_force_Day）白天、夜间(wind_direction_force_Night)
+   2.3 gd_train_data
+          使用地：use_city
+  	  线路名称：line_name
+          刷卡终端ID：terminal_id
+          发卡ID：card_id
+          发卡地：create_city
+          交易时间：Deal_time
+  	  卡类型：card_type
+   2.4 选手提交的结果 gd_predict.txt
+	 线路名称;line_name
+  	 日期：Deal_date
+	 小时段：Deal_hour
+ 	 乘车人次：passenger_count (长整型：bigint)
+         例子：线路10，20150101，10，12
+  
+
 1.some thing to know
 
 title:
