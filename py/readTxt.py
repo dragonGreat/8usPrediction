@@ -1,25 +1,30 @@
 # _*_ coding: utf-8 _*_
 import re
-f1 = open("/passengerForecast/oriData/gd_line_desc.txt",'r');
-try:
-	gd_line_desc = f1.read();
-finally:
-	f1.close()
-	print('%s' % gd_line_desc)
-	str1=re.split('[,\n]',gd_line_desc)
-	#str1=gd_line_desc.split(',')
-	print('%s' % gd_line_desc.split(','))
-	print(str1[2])
-	
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')  
+i=1;
+with open('/passengerForecast/oriData/gd_line_desc.txt', 'r') as f1:  
+    gd_line_desc = f1.readlines();
+    result = list()
+#    print('%s' % gd_line_desc)
+
+for eachline in gd_line_desc:
+	eachlineSplit =eachline.split(',');
+	eachlineSplit[0]=i;
+	i=i+1;
+	eachlineSplit[1] = int(eachlineSplit[1]);
+	eachlineSplit[2] = eachlineSplit[2].strip();#默认删除空白符（包括'\n', '\r',  '\t',  ' ')
+	if eachlineSplit[2].decode('utf-8')==u'广州市内':
+		eachlineSplit[2]=0;
+	else:
+	 	eachlineSplit[2]=1;
+#	print(eachlineSplit[0],eachlineSplit[1],eachlineSplit[2])
+	result.append(eachlineSplit)                                  
+	# print result 
 
 
-with open('/passengerForecast/oriData/gd_line_desc_w.txt', 'w') as f:
-    f.write('Hello, world!')
+with open('/passengerForecast/oriData/gd_line_desc_w.txt','w') as f2:
+    f2.write('%s'% str(result).replace('[','').replace('],','\n').replace(']','').replace(' ',''))
+################################################################################################
 
-
-f2 = open("/passengerForecast/oriData/gd_weather_report.txt",'r');
-try:
-	gd_weather_report = f2.read();
-finally:
-	f2.close();
-#	print('%s' % gd_weather_report)
